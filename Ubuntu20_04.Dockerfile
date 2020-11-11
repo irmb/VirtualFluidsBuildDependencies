@@ -26,6 +26,6 @@ RUN apt-get update &&\
 
 
 RUN cd /tmp \
-    wget https://github.com/NVIDIA/cuda-samples/archive/10.1.2.zip
-    unzip 10.1.2.zip
+    wget https://github.com/NVIDIA/cuda-samples/archive/10.1.2.zip \
+    unzip 10.1.2.zip \
     export NVCUDASAMPLES_ROOT=$(pwd)/cuda-samples-10.1.2
