@@ -22,10 +22,8 @@ RUN apt-get update &&\
     libomp-dev \
     nvidia-cuda-dev=10.1.243-3 nvidia-cuda-toolkit=10.1.243-3 \
     clang clang-format clang-tidy clang-tools llvm-dev libclang-dev \
-    libboost-serialization1.71-dev
-
-
-RUN cd /tmp \
+    libboost-serialization1.71-dev \
+    cd /tmp \
     wget https://github.com/NVIDIA/cuda-samples/archive/10.1.2.zip \
     unzip 10.1.2.zip
 
