@@ -2,6 +2,7 @@
 # Ubuntu 20.04
 # general tools: wget, unzip, git
 # CMake 3.16.3
+# ccache
 # gcc 9.3 (default)
 # openmpi 4.0.3
 # openmp
@@ -17,6 +18,7 @@ RUN apt-get update &&\
     git \
     build-essential \
     cmake=3.16.3-1ubuntu1 \
+    ccache \
     ninja-build \
     openmpi-bin=4.0.3-0ubuntu1 \
     libomp-dev \
