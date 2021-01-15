@@ -6,11 +6,12 @@
 # gcc 9.3 (default)
 # openmpi 4.0.3
 # openmp
-# cuda 10.1 - Additionally download the cuda samples and add NVCUDASAMPLES_ROOT env variable
+# cuda 11.1.1 as a base image - Additionally download the cuda samples and add NVCUDASAMPLES_ROOT env variable
 # clang 10.0 (default)
 # boost serialization 1.71
 
-FROM ubuntu:20.04
+FROM nvidia/cuda:11.1.1-devel-ubuntu20.04
+
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update &&\
     apt-get install -y\
@@ -22,7 +23,6 @@ RUN apt-get update &&\
     ninja-build \
     openmpi-bin=4.0.3-0ubuntu1 \
     libomp-dev \
-    nvidia-cuda-dev=10.1.243-3 nvidia-cuda-toolkit=10.1.243-3 \
     clang clang-format clang-tidy clang-tools llvm-dev libclang-dev \
     libboost-serialization1.71-dev &&\
     mkdir -p /tmp &&\
