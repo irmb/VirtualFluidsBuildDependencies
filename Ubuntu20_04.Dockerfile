@@ -6,7 +6,7 @@
 # gcc 9.3 (default)
 # openmpi 4.0.3
 # openmp
-# cuda 11.1.1 as a base image - Additionally download the cuda samples and add NVCUDASAMPLES_ROOT env variable
+# cuda 11.1.1 as base image
 # clang 10.0 (default)
 # boost serialization 1.71
 
@@ -25,15 +25,10 @@ RUN apt-get update &&\
     libomp-dev \
     clang clang-format clang-tidy clang-tools llvm-dev libclang-dev \
     libboost-serialization1.71-dev &&\
-    mkdir -p /tmp &&\
-    cd /tmp &&\
-    wget https://github.com/NVIDIA/cuda-samples/archive/10.1.2.zip &&\
-    unzip 10.1.2.zip &&\
-    cd /tmp &&\
+    mkdir -p /tmp && cd \tmp &&\
     version=3.19 && build=4 &&\
     wget https://cmake.org/files/v$version/cmake-$version.$build-Linux-x86_64.tar.gz &&\
     tar -xzvf cmake-$version.$build-Linux-x86_64.tar.gz
 
 
-ENV NVCUDASAMPLES_ROOT="/tmp/cuda-samples-10.1.2"
 ENV PATH="/tmp/cmake-3.19.4-Linux-x86_64/bin:$PATH"
