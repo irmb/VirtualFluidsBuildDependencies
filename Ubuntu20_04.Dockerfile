@@ -6,11 +6,10 @@
 # gcc 9.3 (default)
 # openmpi 4.0.3
 # openmp
-# cuda 11.1.1 as base image
+# cuda 11.2.2 as base image
 # clang 10.0 (default)
-# boost serialization 1.71
 
-FROM nvidia/cuda:11.1.1-devel-ubuntu20.04
+FROM nvidia/cuda:11.2.2-devel-ubuntu20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update &&\
@@ -21,8 +20,7 @@ RUN apt-get update &&\
     ninja-build \
     openmpi-bin=4.0.3-0ubuntu1 \
     libomp-dev \
-    clang clang-format clang-tidy clang-tools llvm-dev libclang-dev \
-    libboost-serialization1.71-dev &&\
+    clang clang-format clang-tidy clang-tools llvm-dev libclang-dev &&\
     mkdir -p /usr/local/cmake/ && cd /usr/local/cmake/ &&\
     version=3.19 && build=4 &&\
     wget https://cmake.org/files/v$version/cmake-$version.$build-Linux-x86_64.tar.gz &&\
