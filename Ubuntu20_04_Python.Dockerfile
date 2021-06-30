@@ -1,32 +1,34 @@
 FROM irmb/virtualfluids-deps-ubuntu20.04:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update
-RUN apt-get install python3 -y
-RUN apt-get install python3-venv -y
-RUN apt-get install python3-pip -y
-RUN pip3 install setuptools
-RUN pip3 install wheel
-RUN pip3 install scikit-build
-RUN pip3 install pyvista
-RUN pip3 install numpy
-RUN pip3 install anisble
+RUN apt-get update &&    \
+    apt-get install -y   \
+        build-essential  \                
+        git              \
+        python3          \   
+        python3-venv     \       
+        python3-pip      \       
+        uuid-dev         \
+        libgpgme-dev     \
+        squashfs-tools   \
+        libseccomp-dev   \
+        wget             \
+        pkg-config       \
+        cryptsetup-bin   \
+        golang           \
+        libgl1           \
+    && pip3 install      \ 
+        setuptools       \
+        wheel            \
+        scikit-build     \   
+        pyvista          \
+        numpy            \
+        ansible          \
+    && export VERSION=3.8.0 \
+    && wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-ce-${VERSION}.tar.gz \
+    && tar -xzf singularity-ce-${VERSION}.tar.gz
 
-
-RUN apt-get update && apt-get install -y \
-    uuid-dev \
-    libgpgme-dev \
-    squashfs-tools \
-    libseccomp-dev \
-    pkg-config \
-    cryptsetup-bin \
-    golang
-
-RUN export VERSION=3.6.4 && \
-    wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz && \
-    tar -xzf singularity-${VERSION}.tar.gz
-
-WORKDIR /singularity
+WORKDIR /singularity-ce-3.8.0
 RUN ./mconfig && \
     make -C ./builddir && \
     make -C ./builddir install
